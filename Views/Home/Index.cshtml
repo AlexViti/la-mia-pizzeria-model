@@ -14,7 +14,7 @@
                     <div class="card h-100 p-2 flex-column">
                         <h2>@pizza.Name</h2>
                         <div>@pizza.Description</div>
-                        <img class="img-fluid" src="@pizza.ImageUrl" alt="@pizza.Name" />
+                        <img class="img-fluid" src="@Url.Content(pizza.ImageUrl)" alt="@pizza.Name" />
                         <div class="fw-bolder fs-3 mt-auto">@pizza.GetPrice()</div>
                     </div>
                 </li>

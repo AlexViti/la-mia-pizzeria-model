@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using la_mia_pizzeria_static.DB;
 
@@ -10,9 +11,10 @@ using la_mia_pizzeria_static.DB;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    partial class PizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20220715132433_Ingredients")]
+    partial class Ingredients
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,43 +53,6 @@ namespace la_mia_pizzeria_static.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ingredients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "pomodoro"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = " mozzarella"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = " basilico"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = " prosciutto"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "pomodoro ciliegino"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = " mozarella di bufala"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = " olive"
-                        });
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>

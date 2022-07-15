@@ -1,4 +1,5 @@
-﻿using la_mia_pizzeria_static.Models;
+﻿using la_mia_pizzeria_static.DB;
+using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,14 +7,6 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class HomeController : Controller
     {
-        readonly List<Pizza> pizzas = new()
-            {
-                new("Margherita", "Pomodoro, mozzarella, basilico", 9.99m, "img/margherita.png"),
-                new("Prosciutto", "Pomodoro, mozzarella, prosciutto", 10.99m, "img/prosciutto.png"),
-                new("Bufalina", "Pomodoro ciliegino, mozarella di bufala, olive", 11.99m, "img/bufalina.jpg"),
-                new("Calzone", "Pomodoro, mozzarella, prosciutto", 12.99m, "https://www.pizzaventura.com/wp-content/uploads/2020/03/calzone.jpg")
-            };
-        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -23,7 +16,10 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult Index()
         {
-            return View(pizzas);
+            using(PizzaContext db = new PizzaContext())
+            {
+                return View(db.Pizze.Take(4).ToList());
+            }
         }
 
         [Route("menu")]
@@ -31,8 +27,10 @@ namespace la_mia_pizzeria_static.Controllers
         {
             ViewData["Title"] = "Menu";
 
-            ViewData["Pizze"] = pizzas;
-            return View();
+            using (PizzaContext db = new PizzaContext())
+            {
+                return View(db.Pizze.ToList());
+            }
         }
 
         [Route("dove-siamo")]

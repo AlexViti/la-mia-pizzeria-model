@@ -2,15 +2,17 @@
     Layout = "_MenuLayout";
 }
 
+@model List<Pizza>
+
 <h1>@ViewData["Title"]</h1>
 <ul>
-    @foreach (Pizza pizza in ViewData["Pizze"] as List<Pizza>)
+    @foreach (Pizza pizza in Model)
     {
         <li>
             <div>
                 <h2>@pizza.Name</h2>
                 <div>@pizza.Description</div>
-                <img src="@pizza.ImageUrl" alt="@pizza.Name" />
+                <img src="@Url.Content(pizza.ImageUrl)" alt="@pizza.Name" />
                 <div>@pizza.GetPrice()</div>
             </div>
         </li>

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using la_mia_pizzeria_static.DB;
 
@@ -10,9 +11,10 @@ using la_mia_pizzeria_static.DB;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    partial class PizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20220715131129_PizzaSeedPlus")]
+    partial class PizzaSeedPlus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,75 +22,6 @@ namespace la_mia_pizzeria_static.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("IngredientPizza", b =>
-                {
-                    b.Property<int>("IngredientsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PizzeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IngredientsId", "PizzeId");
-
-                    b.HasIndex("PizzeId");
-
-                    b.ToTable("IngredientPizza");
-                });
-
-            modelBuilder.Entity("la_mia_pizzeria_static.Models.Ingredient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ingredients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "pomodoro"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = " mozzarella"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = " basilico"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = " prosciutto"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "pomodoro ciliegino"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = " mozarella di bufala"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = " olive"
-                        });
-                });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
                 {
@@ -182,21 +115,6 @@ namespace la_mia_pizzeria_static.Migrations
                             Name = "Calzone2",
                             Price = 12.99m
                         });
-                });
-
-            modelBuilder.Entity("IngredientPizza", b =>
-                {
-                    b.HasOne("la_mia_pizzeria_static.Models.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("la_mia_pizzeria_static.Models.Pizza", null)
-                        .WithMany()
-                        .HasForeignKey("PizzeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
