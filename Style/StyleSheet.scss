@@ -1,0 +1,30 @@
+﻿html {
+    position: relative;
+    min-height: 100%;
+    font-size: 16px;
+    
+    @media #{media-table} {
+        font-size: 14px;
+    }
+
+    body {
+        margin-bottom: 60px;
+        background-color: $bg-main;
+
+        .card {
+            transition: transform 0.3s ease-in;
+
+            & img {
+                transition: transform 0.3s ease-out;
+            }
+
+            &:hover {
+                transform: scale(1.1);
+
+                & img {
+                    transform: scaleX(-1);
+                }
+            }
+        }
+    }
+}

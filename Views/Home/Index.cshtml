@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Pizza>
+
+<div class="text-center">
+    <h1 class="display-1 mb-3">LE NOSTRE PIZZE</h1>
+    <div class="container">
+        <ul class="list-unstyled row g-4">
+            @foreach (Pizza pizza in @Model)
+            {
+                <li class="col col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 p-2 flex-column">
+                        <h2>@pizza.Name</h2>
+                        <div>@pizza.Description</div>
+                        <img class="img-fluid" src="@pizza.ImageUrl" alt="@pizza.Name" />
+                        <div class="fw-bolder fs-3 mt-auto">@pizza.GetPrice()</div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+            

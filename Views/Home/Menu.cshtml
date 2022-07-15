@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "_MenuLayout";
+}
+
+<h1>@ViewData["Title"]</h1>
+<ul>
+    @foreach (Pizza pizza in ViewData["Pizze"] as List<Pizza>)
+    {
+        <li>
+            <div>
+                <h2>@pizza.Name</h2>
+                <div>@pizza.Description</div>
+                <img src="@pizza.ImageUrl" alt="@pizza.Name" />
+                <div>@pizza.GetPrice()</div>
+            </div>
+        </li>
+    }
+</ul>
