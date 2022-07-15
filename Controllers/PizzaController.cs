@@ -19,7 +19,11 @@ namespace la_mia_pizzeria_static.Controllers
         // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            using (PizzaContext db = new PizzaContext())
+            {
+                Pizza pizza = db.Pizze.Find(id);
+                return View(pizza);
+            }
         }
 
         // GET: HomeController1/Create

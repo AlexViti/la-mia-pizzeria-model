@@ -1,45 +1,48 @@
-﻿@model IEnumerable<Pizza>
+﻿@model List<Pizza>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-secondary" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Ingredienti
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Prezzo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                Immagine
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var pizza in Model) {
+@foreach (Pizza pizza in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => pizza.Name)
+                <div>
+                    <a class="" asp-action="Details" asp-route-id="@pizza.Id">
+                        @pizza.Name
+                    </a>                        
+                </div>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => pizza.Description)
+                @pizza.Description
             </td>
             <td>
-                @Html.DisplayFor(modelItem => pizza.Price)
+                @pizza.GetPrice()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => pizza.ImageUrl)
+                <img src="@Url.Content(pizza.ImageUrl)" height=100 alt="@pizza.Name" />
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@pizza.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@pizza.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@pizza.Id">Delete</a>
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@pizza.Id">Modifica</a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@pizza.Id">Cancella</a>
             </td>
         </tr>
 }
