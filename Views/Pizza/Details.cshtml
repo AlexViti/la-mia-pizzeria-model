@@ -13,7 +13,7 @@
             @Model.Name
         </dd>
         <dt class = "col-sm-2">
-            Ingredienti
+            Descrizione
         </dt>
         <dd class = "col-sm-10">
             @Model.Description
@@ -30,6 +30,16 @@
         <dd class = "col-sm-10">
             <img src="@Url.Content(Model.ImageUrl)" width="200" alt="@Model.Name" />
         </dd>
+        <dt>
+            Ingredienti
+        </dt>
+        <dd>
+            <ul>
+                @foreach (var ingredient in Model.Ingredients)
+                {
+                    <li>@ingredient.Name</li>
+                }
+            </ul>
     </dl>
 </div>
 <div>

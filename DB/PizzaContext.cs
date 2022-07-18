@@ -15,6 +15,42 @@ namespace la_mia_pizzeria_static.DB
 
         private void PizzaSeed(ModelBuilder modelBuilder)
         {
+            List<Ingredient> ingredients = new()
+            {
+                new()
+                {
+                    Id = 1,
+                    Name = "Pomodoro",
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Mozzarella",
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "Prosciutto",
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "Olive",
+                },
+                new()
+                {
+                    Id = 5,
+                    Name = "Pomodoro ciliegino",
+                },
+                new()
+                {
+                    Id = 6,
+                    Name = "Mozzarella di bufala",
+                }
+            };
+
+            modelBuilder.Entity<Ingredient>().HasData(ingredients);
+
             List<Pizza> pizzas = new()
             {
                 new("Margherita", "Pomodoro, mozzarella, basilico", 9.99m, "~/img/margherita.png"),
@@ -27,50 +63,17 @@ namespace la_mia_pizzeria_static.DB
                 new("Calzone2", "Pomodoro, mozzarella, prosciutto", 12.99m, "https://www.pizzaventura.com/wp-content/uploads/2020/03/calzone.jpg")
             };
 
-            List<Ingredient> ingredients = new();
-            List<string> ingredientsString = new();
-
-            foreach (Pizza pizza in pizzas)
+            for (int i = 0; i < pizzas.Count(); i++)
             {
-                pizza.Id = pizzas.IndexOf(pizza) + 1;
-                List<string> pizzaIngredients = pizza.Description.ToLower().Split(", ").ToList();
-                foreach (string pizzaIngredient in pizzaIngredients)
-                {
-                    if (!ingredientsString.Any(i => i == pizzaIngredient.Trim()))
-                    {
-                        ingredientsString.Add(pizzaIngredient.Trim());
-                    }
-                }
+                pizzas[i].Id = i + 1;
             }
 
-            foreach (string ingredient in ingredientsString)
-            {
-                ingredients.Add(new()
-                {
-                    Name = ingredient,
-                    Id = ingredientsString.IndexOf(ingredient) + 1
-                });
-            }
-
-            modelBuilder.Entity<Ingredient>().HasData(ingredients);
             modelBuilder.Entity<Pizza>().HasData(pizzas);
-
-            foreach (Pizza pizza in pizzas)
-            {
-                List<string> pizzaIngredients = pizza.Description.ToLower().Split(", ").ToList();
-                foreach (string pizzaIngredient in pizzaIngredients)
-                {
-                    pizza.Ingredients.Add(ingredients.First(i => i.Name == pizzaIngredient.Trim()));
-                }
-            }
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            this.PizzaSeed(modelBuilder);
+            PizzaSeed(modelBuilder);
         }
-
     }
 }

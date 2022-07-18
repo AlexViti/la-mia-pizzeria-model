@@ -8,6 +8,6 @@ namespace la_mia_pizzeria_static.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Pizza> Pizze { get; set; }
+        public IList<Pizza> Pizze { get; } = new List<Pizza>();
     }
 }

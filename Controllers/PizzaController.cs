@@ -2,6 +2,7 @@
 using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_static.Controllers
 {
@@ -21,7 +22,7 @@ namespace la_mia_pizzeria_static.Controllers
         {
             using (PizzaContext db = new PizzaContext())
             {
-                Pizza pizza = db.Pizze.Find(id);
+                Pizza pizza = db.Pizze.Where(p => p.Id == id).Include("Ingredients").FirstOrDefault();
                 return View(pizza);
             }
         }

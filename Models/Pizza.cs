@@ -12,7 +12,7 @@ namespace la_mia_pizzeria_static.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
-        public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public IList<Ingredient> Ingredients { get; } = new List<Ingredient>();
 
         public Pizza(string name, string description, decimal price, string imageUrl)
         {
